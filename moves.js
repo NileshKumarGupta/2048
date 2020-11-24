@@ -24,7 +24,6 @@ function moveLeft() {
           `[aria-rowindex="${row}"][aria-colindex="${free_pos}"]`
         ).firstChild;
 
-        console.log(col, free_pos);
 
         let curnum = grid[row][col];
         grid[row][free_pos] = curnum;
@@ -54,7 +53,6 @@ function moveLeft() {
             `[aria-rowindex="${row}"][aria-colindex="${col - 1}"]`
           ).firstChild;
           let curnum = grid[row][col];
-          console.log(curnum);
           curnum *= 2;
           grid[row][col - 1] = curnum;
           grid[row][col] = 0;
@@ -541,4 +539,22 @@ function checkState() {
   document.querySelectorAll(".numberBlock").forEach((ele) => {
     ele.textContent = "";
   });
+}
+
+function backupGrid(){
+  for (let r = 0; r < 4; r++){
+    for (let c = 0; c < 4; c++){
+      backup[r][c] = grid[r][c];
+    }
+  }
+}
+
+function sumTiles() {
+  let sum = 0;
+  for (let r = 0; r < 4; r++){
+    for(let c = 0; c < 4; c++){
+      sum += grid[r][c];
+    }
+  }
+  return sum;
 }
