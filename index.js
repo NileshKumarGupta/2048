@@ -11,7 +11,7 @@ clrdict[256] = ["#fe0dd0", "white"];
 clrdict[512] = ["#ff3300", "white"];
 clrdict[1024] = ["#ed1c03", "white"];
 clrdict[2048] = ["#ff2281", "white"];
-clrdict[NaN] = ["black", "black"];
+clrdict[NaN] = ["black", "white"];
 
 // store the state of grid as global variable
 let grid = [];
@@ -41,6 +41,8 @@ for (let i = 0; i < 4; i++) {
   grid.push(row);
 }
 
+console.log(grid);
+
 // check if a tile is empty
 function gridEmpty() {
   for (let i = 0; i < 4; i++) {
@@ -59,7 +61,7 @@ function checkState() {
 
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
-      if (grid[i][j] == 32) {
+      if (grid[i][j] == 4096) {
         gamewon = true;
         break;
       }

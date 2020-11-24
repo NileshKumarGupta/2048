@@ -24,22 +24,24 @@ function moveLeft() {
           `[aria-rowindex="${row}"][aria-colindex="${free_pos}"]`
         ).firstChild;
 
-        console.log(currblock, leftblock);
+        console.log(col, free_pos);
 
-        /*
         let curnum = grid[row][col];
         grid[row][free_pos] = curnum;
         grid[row][col] = 0;
         leftblock.textContent = curnum.toString();
         currblock.textContent = "";
+        
+        // update colors
+        currblock.style.backgroundColor = clrdict[NaN][0];
+        currblock.style.color = clrdict[NaN][1];
+        leftblock.style.backgroundColor = clrdict[curnum][0]
+        leftblock.style.color = clrdict[curnum][1];
 
-        console.log(leftblock.textContent, curblock.textContent);
-        */
       }
     }
   }
 
-  /*
   // merge
   for (let row = 0; row < 4; row++) {
     for (let col = 1; col < 4; col++) {
@@ -51,10 +53,19 @@ function moveLeft() {
           let leftblock = document.querySelector(
             `[aria-rowindex="${row}"][aria-colindex="${col - 1}"]`
           ).firstChild;
-          grid[row][col - 1] = 2 * grid[row][col];
+          let curnum = grid[row][col];
+          console.log(curnum);
+          curnum *= 2;
+          grid[row][col - 1] = curnum;
           grid[row][col] = 0;
           leftblock.textContent = grid[row][col - 1].toString();
           currblock.textContent = "";
+
+          // update colors
+          currblock.style.backgroundColor = clrdict[NaN][0];
+          currblock.style.color = clrdict[NaN][1];
+          leftblock.style.backgroundColor = clrdict[curnum][0]
+          leftblock.style.color = clrdict[curnum][1];
         }
       }
     }
@@ -90,10 +101,15 @@ function moveLeft() {
         grid[row][col] = 0;
         leftblock.textContent = curnum.toString();
         currblock.textContent = "";
+
+        // update colors
+        currblock.style.backgroundColor = clrdict[NaN][0];
+        currblock.style.color = clrdict[NaN][1];
+        leftblock.style.backgroundColor = clrdict[curnum][0]
+        leftblock.style.color = clrdict[curnum][1];
       }
     }
   }
-  */
 }
 
 function moveRight() {
@@ -117,16 +133,22 @@ function moveRight() {
 
         let currblock = document.querySelector(
           `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
         let rightblock = document.querySelector(
           `[aria-rowindex="${row}"][aria-colindex="${free_pos}"]`
-        );
+        ).firstChild;
 
         let curnum = grid[row][col];
         grid[row][free_pos] = curnum;
         grid[row][col] = 0;
         rightblock.textContent = curnum.toString();
         currblock.textContent = "";
+
+        // update colors
+        currblock.style.backgroundColor = clrdict[NaN][0];
+        currblock.style.color = clrdict[NaN][1];
+        rightblock.style.backgroundColor = clrdict[curnum][0]
+        rightblock.style.color = clrdict[curnum][1];
       }
     }
   }
@@ -138,14 +160,20 @@ function moveRight() {
         if (grid[row][col + 1] == grid[row][col]) {
           let currblock = document.querySelector(
             `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-          );
-          let leftblock = document.querySelector(
+          ).firstChild;
+          let rightblock = document.querySelector(
             `[aria-rowindex="${row}"][aria-colindex="${col + 1}"]`
-          );
-          grid[row][col + 1] = 2 * grid[row][col];
+          ).firstChild;
+          let curnum = 2 * grid[row][col];
+          grid[row][col + 1] = curnum;
           grid[row][col] = 0;
-          leftblock.textContent = grid[row][col + 1].toString();
+          rightblock.textContent = grid[row][col + 1].toString();
           currblock.textContent = "";
+
+          currblock.style.backgroundColor = clrdict[NaN][0];
+          currblock.style.color = clrdict[NaN][1];
+          rightblock.style.backgroundColor = clrdict[curnum][0]
+          rightblock.style.color = clrdict[curnum][1];
         }
       }
     }
@@ -171,16 +199,21 @@ function moveRight() {
 
         let currblock = document.querySelector(
           `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
         let rightblock = document.querySelector(
           `[aria-rowindex="${row}"][aria-colindex="${free_pos}"]`
-        );
+        ).firstChild;
 
         let curnum = grid[row][col];
         grid[row][free_pos] = curnum;
         grid[row][col] = 0;
         rightblock.textContent = curnum.toString();
         currblock.textContent = "";
+
+        currblock.style.backgroundColor = clrdict[NaN][0];
+        currblock.style.color = clrdict[NaN][1];
+        rightblock.style.backgroundColor = clrdict[curnum][0]
+        rightblock.style.color = clrdict[curnum][1];
       }
     }
   }
@@ -207,16 +240,21 @@ function moveUp() {
 
         let currblock = document.querySelector(
           `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
         let upblock = document.querySelector(
           `[aria-rowindex="${free_pos}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
 
         let curnum = grid[row][col];
         grid[free_pos][col] = curnum;
         grid[row][col] = 0;
         upblock.textContent = curnum.toString();
         currblock.textContent = "";
+
+        currblock.style.backgroundColor = clrdict[NaN][0];
+        currblock.style.color = clrdict[NaN][1];
+        upblock.style.backgroundColor = clrdict[curnum][0]
+        upblock.style.color = clrdict[curnum][1];
       }
     }
   }
@@ -228,14 +266,20 @@ function moveUp() {
         if (grid[row - 1][col] == grid[row][col]) {
           let currblock = document.querySelector(
             `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-          );
+          ).firstChild;
           let upblock = document.querySelector(
             `[aria-rowindex="${row - 1}"][aria-colindex="${col}"]`
-          );
-          grid[row - 1][col] = 2 * grid[row][col];
+          ).firstChild;
+          let curnum = 2 * grid[row][col];
+          grid[row - 1][col] = curnum;
           grid[row][col] = 0;
           upblock.textContent = grid[row - 1][col].toString();
           currblock.textContent = "";
+
+          currblock.style.backgroundColor = clrdict[NaN][0];
+          currblock.style.color = clrdict[NaN][1];
+          upblock.style.backgroundColor = clrdict[curnum][0]
+          upblock.style.color = clrdict[curnum][1];
         }
       }
     }
@@ -260,16 +304,22 @@ function moveUp() {
 
         let currblock = document.querySelector(
           `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
         let upblock = document.querySelector(
           `[aria-rowindex="${free_pos}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
 
         let curnum = grid[row][col];
         grid[free_pos][col] = curnum;
         grid[row][col] = 0;
         upblock.textContent = curnum.toString();
         currblock.textContent = "";
+
+        currblock.style.backgroundColor = clrdict[NaN][0];
+        currblock.style.color = clrdict[NaN][1];
+        upblock.style.backgroundColor = clrdict[curnum][0]
+        upblock.style.color = clrdict[curnum][1];
+
       }
     }
   }
@@ -296,16 +346,21 @@ function moveDown() {
 
         let currblock = document.querySelector(
           `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
         let downblock = document.querySelector(
           `[aria-rowindex="${free_pos}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
 
         let curnum = grid[row][col];
         grid[free_pos][col] = curnum;
         grid[row][col] = 0;
         downblock.textContent = curnum.toString();
         currblock.textContent = "";
+
+        currblock.style.backgroundColor = clrdict[NaN][0];
+        currblock.style.color = clrdict[NaN][1];
+        downblock.style.backgroundColor = clrdict[curnum][0]
+        downblock.style.color = clrdict[curnum][1];
       }
     }
   }
@@ -317,14 +372,20 @@ function moveDown() {
         if (grid[row + 1][col] == grid[row][col]) {
           let currblock = document.querySelector(
             `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-          );
-          let upblock = document.querySelector(
+          ).firstChild;
+          let downblock = document.querySelector(
             `[aria-rowindex="${row + 1}"][aria-colindex="${col}"]`
-          );
-          grid[row + 1][col] = 2 * grid[row][col];
+          ).firstChild;
+          let curnum = 2 * grid[row][col];
+          grid[row + 1][col] = curnum;
           grid[row][col] = 0;
-          upblock.textContent = grid[row + 1][col].toString();
+          downblock.textContent = grid[row + 1][col].toString();
           currblock.textContent = "";
+
+          currblock.style.backgroundColor = clrdict[NaN][0];
+          currblock.style.color = clrdict[NaN][1];
+          downblock.style.backgroundColor = clrdict[curnum][0]
+          downblock.style.color = clrdict[curnum][1];
         }
       }
     }
@@ -350,16 +411,21 @@ function moveDown() {
 
         let currblock = document.querySelector(
           `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
         let downblock = document.querySelector(
           `[aria-rowindex="${free_pos}"][aria-colindex="${col}"]`
-        );
+        ).firstChild;
 
         let curnum = grid[row][col];
         grid[free_pos][col] = curnum;
         grid[row][col] = 0;
         downblock.textContent = curnum.toString();
         currblock.textContent = "";
+
+        currblock.style.backgroundColor = clrdict[NaN][0];
+        currblock.style.color = clrdict[NaN][1];
+        downblock.style.backgroundColor = clrdict[curnum][0]
+        downblock.style.color = clrdict[curnum][1];
       }
     }
   }
@@ -397,7 +463,11 @@ function addTile() {
 
 
   grid[row][col] = insertVal;
-  document.querySelector(
+  let emptyblock = document.querySelector(
     `[aria-rowindex="${row}"][aria-colindex="${col}"]`
-  ).textContent = insertVal.toString();
+  ).firstChild
+  emptyblock.textContent = insertVal.toString();
+  emptyblock.style.backgroundColor = clrdict[insertVal][0];
+  emptyblock.style.color = clrdict[insertVal][1];
+
 }
