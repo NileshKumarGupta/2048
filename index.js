@@ -58,6 +58,15 @@ addTile();
 // somehow show the moves taken
 
 simulateButton.addEventListener("click", () => {
+  if(sumTiles() > 8){
+    sumDisplay.style.display = "block";
+    sumDisplay.textContent = "Disabled since current sum: " + sumTiles() + " is greater than 8";
+    setTimeout(() => {
+      sumDisplay.style.display = "none";
+    }, 1500)
+    return;
+  }
+
   const leftkey = new KeyboardEvent('keydown', {code: "KeyA"});
   const rightkey = new KeyboardEvent('keydown', {code: "KeyD"});
   const upkey = new KeyboardEvent('keydown', {code: "KeyW"});
@@ -69,6 +78,20 @@ simulateButton.addEventListener("click", () => {
   sumDisplay.textContent = "Current Sum: " + sumTiles();
 
   let move = parseInt(Math.random() * 4);
+  switch(move){
+    case 0:
+      moveDisplay.textContent = "Current Move: Left"
+      break;
+    case 1:
+      moveDisplay.textContent = "Current Move: Right"
+      break;
+    case 2:
+      moveDisplay.textContent = "Current Move: Up"
+      break;
+    case 3:
+      moveDisplay.textContent = "Current Move: Down"
+      break;
+  }
 
   const simulate = setInterval(() => {
     // make a move
@@ -92,19 +115,15 @@ simulateButton.addEventListener("click", () => {
     console.log(move)
     switch (move) {
       case 0:
-        moveDisplay.textContent = "Current Move: Left"
         document.dispatchEvent(leftkey);
         break;
       case 1:
-        moveDisplay.textContent = "Current Move: Right"
         document.dispatchEvent(rightkey);
         break;
       case 2:
-        moveDisplay.textContent = "Current Move: Up"
         document.dispatchEvent(upkey);
         break;
       case 3:
-        moveDisplay.textContent = "Current Move: Down"
         document.dispatchEvent(downkey);
         break;
     }
@@ -113,9 +132,22 @@ simulateButton.addEventListener("click", () => {
     sumDisplay.textContent = "Current Sum: " + sumTiles();
 
     move = parseInt(Math.random() * 4);
+    switch(move){
+      case 0:
+        moveDisplay.textContent = "Current Move: Left"
+        break;
+      case 1:
+        moveDisplay.textContent = "Current Move: Right"
+        break;
+      case 2:
+        moveDisplay.textContent = "Current Move: Up"
+        break;
+      case 3:
+        moveDisplay.textContent = "Current Move: Down"
+        break;
+    }
 
   }, 1500);
-
 
 })
 
