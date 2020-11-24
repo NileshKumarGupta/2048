@@ -1,5 +1,5 @@
 // color dictionary
-clrdict = {};
+let clrdict = {};
 clrdict[2] = ["#ffba08", "black"];
 clrdict[4] = ["#faa307", "black"];
 clrdict[8] = ["#e0aaff", "black"];
@@ -13,6 +13,7 @@ clrdict[1024] = ["#f6f4d2", "black"];
 clrdict[2048] = ["#d4e098", "black"];
 clrdict[NaN] = ["black", "white"];
 
+// initialize grid
 // store the state of grid as global variable
 let grid = [];
 
@@ -41,78 +42,8 @@ for (let i = 0; i < 4; i++) {
   grid.push(row);
 }
 
-console.log(grid);
-
-// check if a tile is empty
-function gridEmpty() {
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      if (grid[i][j] == 0) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-// check current state of game
-function checkState() {
-  let gamewon = false;
-
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      if (grid[i][j] == 128) {
-        gamewon = true;
-        break;
-      }
-    }
-  }
-
-  if (!gamewon && gridEmpty()) return;
-
-  let movePossible = false;
-
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      if (i - 1 > 0 && grid[i - 1][j] == grid[i][j]) {
-        movePossible = true;
-        break;
-      }
-      if (i + 1 < 4 && grid[i + 1][j] == grid[i][j]) {
-        movePossible = true;
-        break;
-      }
-      if (j - 1 > 0 && grid[i][j - 1] == grid[i][j]) {
-        movePossible = true;
-        break;
-      }
-      if (j + 1 < 4 && grid[i][j + 1] == grid[i][j]) {
-        movePossible = true;
-        break;
-      }
-    }
-  }
-
-  if (!gamewon && movePossible) return;
-
-  if (gamewon) {
-    document.querySelector("#gameContainer").style.display = "none";
-    document.querySelector("#won").style.display = "block";
-  } else if (!movePossible) {
-    document.querySelector("#gameContainer").style.display = "none";
-    document.querySelector("#lost").style.display = "block";
-  }
-
-  grid = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ];
-  document.querySelectorAll(".numberBlock").forEach((ele) => {
-    ele.textContent = "";
-  });
-}
+addTile();
+addTile();
 
 // event listener for key presses
 document.addEventListener("keydown", (event) => {

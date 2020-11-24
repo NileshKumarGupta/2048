@@ -471,3 +471,74 @@ function addTile() {
   emptyblock.style.color = clrdict[insertVal][1];
 
 }
+
+// check if a tile is empty
+function gridEmpty() {
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (grid[i][j] == 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+// check current state of game
+function checkState() {
+  let gamewon = false;
+
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (grid[i][j] == 2) {
+        gamewon = true;
+        break;
+      }
+    }
+  }
+
+  if (!gamewon && gridEmpty()) return;
+
+  let movePossible = false;
+
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (i - 1 > 0 && grid[i - 1][j] == grid[i][j]) {
+        movePossible = true;
+        break;
+      }
+      if (i + 1 < 4 && grid[i + 1][j] == grid[i][j]) {
+        movePossible = true;
+        break;
+      }
+      if (j - 1 > 0 && grid[i][j - 1] == grid[i][j]) {
+        movePossible = true;
+        break;
+      }
+      if (j + 1 < 4 && grid[i][j + 1] == grid[i][j]) {
+        movePossible = true;
+        break;
+      }
+    }
+  }
+
+  if (!gamewon && movePossible) return;
+
+  if (gamewon) {
+    document.querySelector("#gameContainer").style.display = "none";
+    document.querySelector("#won").style.display = "block";
+  } else if (!movePossible) {
+    document.querySelector("#gameContainer").style.display = "none";
+    document.querySelector("#lost").style.display = "block";
+  }
+
+  grid = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ];
+  document.querySelectorAll(".numberBlock").forEach((ele) => {
+    ele.textContent = "";
+  });
+}
