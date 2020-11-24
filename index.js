@@ -1,4 +1,6 @@
 const simulateButton = document.querySelector("#simulateGame");
+const moveDisplay = document.querySelector("#nextMove");
+const sumDisplay = document.querySelector("#curSum");
 // color dictionary
 let clrdict = {};
 clrdict[0] = ["black", "white"];
@@ -62,6 +64,10 @@ simulateButton.addEventListener("click", () => {
   const downkey = new KeyboardEvent('keydown', {code: "KeyS"});
   const undokey = new KeyboardEvent('keydown', {code: "KeyU"});
 
+  moveDisplay.style.display = "block";
+  sumDisplay.style.display = "block";
+  sumDisplay.textContent = "Current Sum: " + sumTiles();
+
   let move = parseInt(Math.random() * 4);
 
   const simulate = setInterval(() => {
@@ -69,34 +75,48 @@ simulateButton.addEventListener("click", () => {
 
     let sum = sumTiles();
     if(sum > 8){
+      moveDisplay.textContent = "Current Move: Undo"
       document.dispatchEvent(undokey);
+      sumDisplay.textContent = "Current Sum: " + sumTiles();
       return;
     }
     else if(sum == 8){
       clearInterval(simulate);
+      document.querySelector("#gameContainer").style.display = "none";
+      document.querySelector("#won").style.display = "block";
+      simulateButton.textContent = "Restart"
+      simulateButton.addEventListener("click", () => location.reload())
       return;
     }
 
     console.log(move)
     switch (move) {
       case 0:
+        moveDisplay.textContent = "Current Move: Left"
         document.dispatchEvent(leftkey);
         break;
       case 1:
+        moveDisplay.textContent = "Current Move: Right"
         document.dispatchEvent(rightkey);
         break;
       case 2:
+        moveDisplay.textContent = "Current Move: Up"
         document.dispatchEvent(upkey);
         break;
       case 3:
+        moveDisplay.textContent = "Current Move: Down"
         document.dispatchEvent(downkey);
         break;
     }
 
 
+    sumDisplay.textContent = "Current Sum: " + sumTiles();
+
     move = parseInt(Math.random() * 4);
 
-  }, 500);
+  }, 1500);
+
+
 })
 
 // event listener for key presses

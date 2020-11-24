@@ -44,6 +44,7 @@ iframe{
 }
 
 button{
+  display: block;
   font-size: 1.2rem;
   margin: auto;
   border-radius: 5px;
@@ -51,4 +52,19 @@ button{
   padding: 4px;
   background-color: #7DB32E;
   color: white;
+}
+
+#nextMove{
+  display: none;
+  color: white;
+}
+
+#curSum{
+  display: none;
+  color: white;
+}
+
+#Status{
+  display: grid;
+  grid-template-columns: 7fr 1fr 1fr;
 }
