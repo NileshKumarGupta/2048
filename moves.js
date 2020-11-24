@@ -490,7 +490,7 @@ function checkState() {
 
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
-      if (grid[i][j] == 2) {
+      if (grid[i][j] == 2048) {
         gamewon = true;
         break;
       }
