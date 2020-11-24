@@ -1,16 +1,16 @@
 // color dictionary
 clrdict = {};
-clrdict[2] = ["#00ffff", "black"];
-clrdict[4] = ["#099fff", "black"];
-clrdict[8] = ["#0062ff", "black"];
-clrdict[16] = ["#cc00ff", "black"];
-clrdict[32] = ["#0033ff", "white"];
-clrdict[64] = ["#9d00ff", "white"];
-clrdict[128] = ["#9900ff", "white"];
-clrdict[256] = ["#fe0dd0", "white"];
-clrdict[512] = ["#ff3300", "white"];
-clrdict[1024] = ["#ed1c03", "white"];
-clrdict[2048] = ["#ff2281", "white"];
+clrdict[2] = ["#ffba08", "black"];
+clrdict[4] = ["#faa307", "black"];
+clrdict[8] = ["#e0aaff", "black"];
+clrdict[16] = ["#a2d2ff", "black"];
+clrdict[32] = ["#bde0fe", "black"];
+clrdict[64] = ["#ffafcc", "black"];
+clrdict[128] = ["#ffc8dd", "black"];
+clrdict[256] = ["#80ffdb", "black"];
+clrdict[512] = ["#72efdd", "black"];
+clrdict[1024] = ["#f6f4d2", "black"];
+clrdict[2048] = ["#d4e098", "black"];
 clrdict[NaN] = ["black", "white"];
 
 // store the state of grid as global variable
@@ -61,7 +61,7 @@ function checkState() {
 
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
-      if (grid[i][j] == 4096) {
+      if (grid[i][j] == 128) {
         gamewon = true;
         break;
       }
@@ -96,9 +96,11 @@ function checkState() {
   if (!gamewon && movePossible) return;
 
   if (gamewon) {
-    console.log("Win");
+    document.querySelector("#gameContainer").style.display = "none";
+    document.querySelector("#won").style.display = "block";
   } else if (!movePossible) {
-    console.log("Lost");
+    document.querySelector("#gameContainer").style.display = "none";
+    document.querySelector("#lost").style.display = "block";
   }
 
   grid = [
